@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wishing App</title>
+    <link rel="stylesheet" href="/static/sp.css">
+</head>
+<body>
+    <div class="plate">
+        <div class="container">
+            <div class="links">
+                <h2>Hello {{user.first_name}}! These are your stats!</h2>
+                <a href="/dashboard"><h3>Dashboard</h3></a>
+                <a href="/logout"><h3>Logout</h3></a>
+            </div>
+            <div class="box">
+                <div>
+                    <h3 class="t">Total wishes granted so far for all users: {{gwishes|length}}</h3>
+                </div>
+                <div>
+                    <p>Your granted wishes: {{mgwishes|length}}</p>
+                    <p>Your pending wishes: {{ugwishes|length}}</p>
+                </div>  
+            </div>
+        </div>
+    </div>
+</body>
+</html>

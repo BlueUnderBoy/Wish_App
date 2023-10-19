@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wishing App</title>
+    <link rel="stylesheet" href="static/up.css">
+</head>
+<body>
+    <div class="username">
+        <h1>Hello {{user.first_name}}!</h1>
+        <div class="links">
+            <a class="lg" href="/logout"><h3>Logout</h3></a>
+            <a class="stat" href="/stats/{{user.user_id}}"><h3>View Stats</h3></a>
+            <a class='af' href="/create_wish"><h3>Make a wish!</h3></a>
+        </div>
+    </div>
+    <div class="plate">
+        <div class="container">
+            <div class="fav_shows">
+                <h1>Your wish list:</h1>
+            </div>
+            <table border="0">
+                <div class="head">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Date added</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </div>
+                <tbody class="body">
+                {% if ugwishes|length == 0: %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% else: %}
+                    {% for one_wish in ugwishes: %}
+                        <tr>
+                            <td>{{one_wish.item}}</td>
+                            <td class="r">{{one_wish.dateadd}}</td>
+                            <td>
+                                <a href="/wishes/delete/{{one_wish.wish_id}}">Remove | </a>
+                                <a href="/wishes/update/{{one_wish.wish_id}}">Edit | </a>
+                                <a href="/grant/{{one_wish.wish_id}}">Granted!</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+            <div class="fav_trips">
+                <h1>Granted wishes:</h1>
+            </div>
+            <table border="0">
+                <div class="head">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Wisher</th>
+                            <th>Date added</th>
+                            <th>Date Granted</th>
+                            <th>Likes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </div>
+                <tbody class="body">
+                {% if gwishes|length == 0: %}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% else %}
+                    {% for one_wish in mgwishes: %}
+                        <tr>
+                            <td>{{one_wish['item']}}</td>
+                            <td>{{one_wish['first_name']}}</td>
+                            <td>{{one_wish['dateadd']}}</td>
+                            <td>{{one_wish['dategrant']}}</td>
+                            <td>{{one_wish.likes}}</td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                    {% for one_wish in ogwishes: %}
+                        <tr>
+                            <td>{{one_wish['item']}}</td>
+                            <td>{{one_wish['first_name']}}</td>
+                            <td>{{one_wish['dateadd']}}</td>
+                            <td>{{one_wish['dategrant']}}</td>
+                            <td>{{one_wish.likes}}</td>
+                            <td><a class='like' href="/like/{{one_wish.wish_id}}"><img src="static/like.jpg" alt="like" class="lp"></a></td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

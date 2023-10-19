@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wishing App</title>
+    <link rel="stylesheet" href="/static/af.css">
+</head>
+<body>
+    <div class="links">
+        <a class="lo" href="/logout"><h3>Logout</h3></a>
+    </div>
+    <div class="plate">
+        <div class="container">
+            <div>
+                <h1>Hello {{user.first_name}}! Make a wish!</h1>
+            </div>
+            <div class="fg">
+                <form action="/addwish" method="POST">
+                    {% with messages = get_flashed_messages(category_filter=['create']) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                        <p class="flash">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <div class="form-group">
+                        <label for="item">I wish for:</label>
+                        <input class="i" type="text" name="item">
+                    </div>
+                    <div class="form-group">
+                        <div class="des">
+                            <label for="description">Description:</label>
+                            <input class="t" type="text" name="description">
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <a class="can" href="/dashboard">Cancel</a>
+                        <input type="submit" class="btn" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

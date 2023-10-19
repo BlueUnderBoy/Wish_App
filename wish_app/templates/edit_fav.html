@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wishing App</title>
+    <link rel="stylesheet" href="/static/ef.css">
+</head>
+<body>
+    <div class="found">
+        <div class="links">
+            <a href="/logout"><h3>Logout</h3></a>
+        </div>
+    </div>
+    <div class="plate">
+        <div>
+            <h1>Hello {{user.first_name}}! Let's edit your wish!</h1>
+        </div>
+        <div class="container"> 
+            <div>
+            <form action="/wishes/edit" method="POST">
+                {% with messages = get_flashed_messages(category_filter=['create']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                    <p class="flash">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            <div class="form-group">
+                <label class="lw" for="item">I wish for:</label>
+                <input class="i" type="text" name="item" value="{{wish.item}}">
+            </div>
+            <div class="form-group">
+                <div class="des">
+                    <label for="description">Description:</label>
+                    <input class="t" type="text" name="description" value="{{wish.description}}">
+                </div>
+            </div>
+            <div class="btns">
+                <button class="cbtn" href="/dashboard">Cancel</button>
+                <input class="btn" type="submit" value="Edit">
+            </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
